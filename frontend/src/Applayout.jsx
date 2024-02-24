@@ -1,6 +1,6 @@
 import { Layout } from "antd";
-import NavHeader from "../components/NavHeader";
-import MainContent from "../components/MainContent";
+import NavHeader from "./components/NavHeader";
+import MainContent from "./components/MainContent";
 
 function Applayout() {
     return (
