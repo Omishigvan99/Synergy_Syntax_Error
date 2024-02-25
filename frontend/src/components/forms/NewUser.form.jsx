@@ -1,8 +1,10 @@
-import { Button, Form, Input } from "antd";
+import { Alert, Button, Form, Input, notification } from "antd";
 import axios from "axios";
+import { useState } from "react";
 
 function NewUser() {
     const [form] = Form.useForm();
+    const [error, setError] = useState(null);
 
     const onSubmitHandler = async () => {
         const formValues = form.getFieldsValue();
@@ -12,11 +14,17 @@ function NewUser() {
                     "Content-Type": "application/json",
                 },
             })
-            .then((res) => {
-                console.log(res);
+            .then(() => {
+                notification.success({
+                    message: "User added successfully",
+                    description: "User added successfully",
+                });
             })
             .catch((err) => {
-                console.log(err);
+                console.log(err)
+                setError({
+                    message: err.response.data,
+                });
             });
     };
 
@@ -39,6 +47,16 @@ function NewUser() {
                     Request
                 </Button>
             </Form.Item>
+            {error ? (
+                <Alert
+                    message={error.message}
+                    type="warning"
+                    closable
+                    onClose={() => {
+                        setError(null);
+                    }}
+                ></Alert>
+            ) : null}
         </Form>
     );
 }

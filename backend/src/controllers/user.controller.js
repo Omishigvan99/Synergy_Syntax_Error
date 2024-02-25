@@ -54,7 +54,7 @@ async function addUser(web3, abi, bytecode, data) {
         console.log("User validated: ", validateResult);
     } catch (e) {
         console.log("Error: ")
-        console.log(e);
+        throw e;
     }
 }
 
